@@ -50,7 +50,7 @@ public interface Constants {
 	public static String NOT_DELETE = "Not Delete";
 	public static Integer DEFAULT_VALUE_0 = 0;
 	public static Integer DEFAULT_VALUE_1 = 1;
-	
+
 	public static int NUMBER_PAGE_LIMIT = 12;
 	public static int NUMBER_PAGE_DEFAULT = 1;
 
@@ -58,7 +58,10 @@ public interface Constants {
 	public static String CLOUDINARY_CLOUD_NAME = "framgia-project2";
 	public static String CLOUDINARY_API_KEY = "648469395782282";
 	public static String CLOUDINARY_API_SECRET = "OhcyxdSzZnL-nPI1X9LFcuzsjG4";
-	
+
 	// path
 	public static String PATH_UPLOAD = "mm_images/profile/";
+
+	// Name System
+	public static String NAME_SYSTEM = "System";
 }
