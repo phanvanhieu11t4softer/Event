@@ -20,12 +20,24 @@ function getGroup(id) {
     		$("input[name=status][value=" + data.status + "]").prop('checked', true);
     		$("input[name=type][value=" + data.type + "]").prop('checked', true);
 
+    		var flgJoin = true;
+            for (var i = 0; i < data.user.length; i++) {
+                if ($(".lblusername").text() == data.user[i].username) {
+                	flgJoin = false;
+                	break;
+                }
+            }
+            if (flgJoin) {
+    	    	$(".btnRequestJoin").removeClass('hidden_elem');
+    	    	$(".lblIdGroup").text(data.id);
+            }
+    		
     		// List member
     		if (data.user.length > 0) {
 	    		if ($.fn.DataTable.isDataTable('#dataTables-result')) {
 	                $('#dataTables-result').DataTable().destroy();
 	            }
-	    		var flgJoin = false;
+
                 $('#dataTables-result').DataTable({
                     "bProcessing" : true,
                     "aaData" : data.user,
@@ -36,11 +48,6 @@ function getGroup(id) {
                     	{
                             "mDataProp" : "username",
                             "mRender" : function(data, type, row) {
-
-                    	    	if ($(".lblusername").text() == row.username) {
-                    	    		flgJoin = true;
-                    	    	}
-                    	    	
                                 return "<a target='_blank' href='/EventMedia/manager/user/" + row.id + "'>"
                                         + data+"</a>";
                             },
@@ -51,11 +58,7 @@ function getGroup(id) {
                         }],
                     responsive : true
                 });
-
-                if (!flgJoin) {
-        	    	$(".btnRequestJoin").removeClass('hidden_elem');
-        	    	$(".lblIdGroup").text(data.id);
-                }
+                
                 $(".listMember").show();
 			} else {
 				 $(".listMember").hide();

@@ -22,7 +22,6 @@ import com.framgia.util.Helpers;
  * 
  * @author phan.van.hieu@framgia.com
  *
- * @author framgia
  */
 @RestController
 public class UploadImageController {
