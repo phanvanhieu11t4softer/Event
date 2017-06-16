@@ -121,4 +121,20 @@ public class UserController {
 	public @ResponseBody boolean requestJoinGroup(@PathVariable("id") Integer id) {
 		return userService.requestUserJoinGroup(id, Helpers.getIdUser());
 	}
+
+	// my Group
+	@RequestMapping(value = { "/user/myGroup" }, method = RequestMethod.GET)
+	public ModelAndView initMyGroup() {
+		return new ModelAndView("myGroup");
+	}
+
+	@RequestMapping(value = { "/user/myGroup" }, method = RequestMethod.POST)
+	public @ResponseBody GroupInfo infoMyGroup() {
+		
+		UserInfo user = userService.findById(Helpers.getIdUser(), false);
+		if (user == null) {
+			return null;
+		}
+		return groupService.findById(user.getIdGroup(), false);
+	}
 }

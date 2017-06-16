@@ -27,7 +27,7 @@
 			<center><spring:message code='init_group' text='' /></center></div>
 	</section>
 
-	<section class="bg_white clearfix manageUser infoGroup">
+	<section hidden="true" class="bg_white clearfix manageUser infoGroup">
 		<div class="body clearfix mt20">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -107,7 +107,7 @@
 	</section>
 
 	<!-- List member -->
-	<section class="bg_white clearfix manageUser listMember">
+	<section hidden="true" class="bg_white clearfix manageUser listMember">
 		<div class="body clearfix mt20">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -144,7 +144,7 @@
 	</section>
 
 	<!-- List image -->
-	<section class="bg_white clearfix manageUser listImage">
+	<section hidden="true" class="bg_white clearfix manageUser listImage">
 		<div class="body clearfix mt20">
 				<div class="panel panel-default">
 					<div class="panel-heading">List image</div>
