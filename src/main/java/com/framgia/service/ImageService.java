@@ -19,4 +19,8 @@ public interface ImageService extends BaseService {
 	boolean addVote(Integer idImage, Integer idUser);
 
 	boolean removeVote(Integer id, Integer idUser);
+
+	Boolean getInfoUser(Integer idUser);
+
+	Integer getPermissionId(String username);
 }

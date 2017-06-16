@@ -162,8 +162,8 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			Group group = groupDAO.findById(idGroup, false);
 			if (group == null) {
 				return false;
-			} else if (Constants.GROUP_TYPE_CODE_PRIVATE.equals(group.getType()) || 
-					Constants.DEL_FLG_DEL.equals(group.getDeleteFlag())){
+			} else if (Constants.GROUP_TYPE_CODE_PRIVATE.equals(group.getType())
+					|| Constants.DEL_FLG_DEL.equals(group.getDeleteFlag())) {
 				return false;
 			}
 			User user = userDAO.findById(idUser, true);
@@ -172,12 +172,36 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			user.setIdGroup(idGroup);
 			user.setDateUpdate(DateUtil.getDateNow());
 			user.setUserUpdate(user.getUsername());
-			
+
 			userDAO.saveOrUpdate(user);
 			return true;
 		} catch (Exception e) {
 			logger.error("user request to join this group", e);
 			throw e;
 		}
+	}
+
+	@Override
+	public Integer getInfoUser(Integer idUser) {
+		try {
+			User user = userDAO.findById(idUser, false);
+			if (user == null) {
+				return null;
+			}
+			if (user.getPermission().getId() == 1) {
+				return 1;
+			} else if (user.getPermission().getId() == 2) {
+				return 2;
+			} else {
+				if (Constants.STATUSJOIN_CODE_APPOVE.equals(user.getStatusJoin()) && user.getIdGroup() != null) {
+					return 3;
+				} else {
+					return 4;
+				}
+			}
+		} catch (Exception e) {
+			logger.error("getInfoUser", e);
+		}
+		return null;
 	}
 }
