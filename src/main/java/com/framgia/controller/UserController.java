@@ -130,11 +130,17 @@ public class UserController {
 
 	@RequestMapping(value = { "/user/myGroup" }, method = RequestMethod.POST)
 	public @ResponseBody GroupInfo infoMyGroup() {
-		
+
 		UserInfo user = userService.findById(Helpers.getIdUser(), false);
 		if (user == null) {
 			return null;
 		}
 		return groupService.findById(user.getIdGroup(), false);
 	}
+
+	@RequestMapping(value = { "/user/leaveGroup" }, method = RequestMethod.GET)
+	public @ResponseBody boolean leaveGroup() {
+		return userService.leaveGroup(Helpers.getIdUser());
+	}
+
 }

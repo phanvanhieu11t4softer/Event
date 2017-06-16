@@ -7,7 +7,7 @@ div.panel-heading {
 	height: 45px;
 }
 
-div.btnRequestJoin, #divBtnEdit {
+div.btnRequestJoin, #divBtnEdit, div.btnLeaveGroup {
 	float: right;
 	with: 20%;
 	margin-top: -4px;

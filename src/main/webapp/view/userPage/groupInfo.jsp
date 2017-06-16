@@ -16,6 +16,10 @@
 		<spring:message code='message-request-join-group-error' text='' /></label>
 	<label id="requestJoinSuccess" class="hidden_elem">
 		<spring:message code='message-request-join-group-success' text='' /></label>
+	<label id="comfirmLeaveGroup" class="hidden_elem">
+		<spring:message code='message-comfirm-leave-group' text='' /></label>
+	<label id="mgsLeaveGroupSuccess" class="hidden_elem">
+		<spring:message code='message-leave-group-success' text='' /></label>
 
 	<section class="bg_white clearfix messageError">
 		<div class="body clearfix mt20" id="mgsRequestJoin">
@@ -39,6 +43,9 @@
 							<label class="lblusername hidden_elem">${pageContext.request.userPrincipal.name}</label>
 							<label class="lblIdGroup hidden_elem"></label>
 							<input type="button" onclick="clickBtnRequestJoin();" value="Request Join Group" class="btn btn-default">
+						</div>
+						<div class="btnLeaveGroup hidden_elem">
+							<input type="button" onclick="clickLeaveGroup();" value="Leave Group" class="btn btn-default">
 						</div>
 					</c:if>
 				</div>
@@ -169,12 +176,14 @@
 					</div>
 					<!-- /.panel-body -->
 				</div>
-				<div id="sub_btn">
-					<a href="/EventMedia/user"><input type="button"
-						value="Back home" class="btn-forwardscreen"></a>
-				</div>
 			</div>
 		<div class="clearfix"></div>
+	</section>
+	<section>
+		<div id="sub_btn">
+			<a href="/EventMedia/user"><input type="button"
+				value="Back home" class="btn-forwardscreen"></a>
+		</div>
 	</section>
 
 </body>

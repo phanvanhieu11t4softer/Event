@@ -163,7 +163,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			if (group == null) {
 				return false;
 			} else if (Constants.GROUP_TYPE_CODE_PRIVATE.equals(group.getType())
-					|| Constants.DEL_FLG_DEL.equals(group.getDeleteFlag())) {
+			        || Constants.DEL_FLG_DEL.equals(group.getDeleteFlag())) {
 				return false;
 			}
 			User user = userDAO.findById(idUser, true);
@@ -203,5 +203,23 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			logger.error("getInfoUser", e);
 		}
 		return null;
+	}
+
+	@Override
+	public boolean leaveGroup(Integer idUser) {
+		try {
+			User user = userDAO.findById(idUser, true);
+			if (user == null)
+				return false;
+
+			user.setIdGroup(null);
+			user.setStatusJoin(Constants.STATUSJOIN_CODE_FREE);
+			user.setDateUpdate(DateUtil.getDateNow());
+			user.setUserUpdate(user.getUsername());
+			return true;
+		} catch (Exception e) {
+			logger.error("leaveGroup error", e);
+			throw e;
+		}
 	}
 }
