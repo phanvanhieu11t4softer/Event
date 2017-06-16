@@ -146,6 +146,7 @@
 	<definition name="manageuser" extends="base.definition">
 		<put-attribute name="title" value="Manager User" />
 		<put-attribute name="screenname" value="Manager User" />
+		<put-attribute name="menu" value="/view/admin/menu.jsp" />
 		<put-attribute name="body" value="/view/admin/manageUsers.jsp" />
 		<put-list-attribute name="cssDefault">
 			<add-attribute value="/assets/css/bootstrap.min.css" />
@@ -216,6 +217,7 @@
 	<definition name="managegroup" extends="base.definition">
 		<put-attribute name="title" value="Manager Group" />
 		<put-attribute name="screenname" value="Manager Group" />
+		<put-attribute name="menu" value="/view/admin/menu.jsp" />
 		<put-attribute name="body" value="/view/admin/manageGroup.jsp" />
 		<put-list-attribute name="cssDefault">
 			<add-attribute value="/assets/css/bootstrap.min.css" />
@@ -426,7 +428,7 @@
 	<definition name="chat" extends="base.definition">
 		<put-attribute name="title" value="Chat" />
 		<put-attribute name="screenname" value="Chat" />
-		<put-attribute name="menu" value="/view/admin/menu.jsp" />
+		<put-attribute name="menu" value="/view/chat/menu.jsp" />
 		<put-attribute name="body" value="/view/chat/chatSocket.jsp" />
 		<put-list-attribute name="cssDefault">
 			<add-attribute value="/assets/css/bootstrap.min.css" />
