@@ -47,10 +47,6 @@ function getGroup(id) {
                     "aoColumns" : [
                     	{
                             "mDataProp" : "username",
-                            "mRender" : function(data, type, row) {
-                                return "<a target='_blank' href='/EventMedia/manager/user/" + row.id + "'>"
-                                        + data+"</a>";
-                            },
                         }, { "mDataProp" : "name"
                         }, { "mDataProp" : "email"
                         }, { "mDataProp" : "phone"
