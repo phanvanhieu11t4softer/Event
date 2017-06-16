@@ -1,6 +1,7 @@
 package com.framgia.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.framgia.bean.GroupInfo;
 import com.framgia.bean.ImageInfo;
+import com.framgia.bean.PagingImage;
 import com.framgia.bean.UserInfo;
 import com.framgia.service.GroupService;
 import com.framgia.service.ImageService;
@@ -155,8 +157,27 @@ public class ManagerController {
 	@RequestMapping(value = "/manager/{id}/chart", method = RequestMethod.GET)
 	public ModelAndView getDataForStatistical(@PathVariable("id") Integer id) {
 
-		return new ModelAndView("statisticalImageForGroup", "highchart",
-		        groupService.getDataForHighchart(id));
+		return new ModelAndView("statisticalImageForGroup", "highchart", groupService.getDataForHighchart(id));
 	}
 
+	@RequestMapping(value = { "/homeManagerPage" }, method = RequestMethod.GET)
+	public ModelAndView homeManagerPage() {
+
+		logger.info("Init page image manager Group");
+		List<ImageInfo> listImage = imageService.getListImage(null, Constants.NUMBER_PAGE_DEFAULT);
+		ModelAndView mv = new ModelAndView("homeManagePage", "image", listImage);
+
+		Integer noOfRecord = imageService.getNoOfRecord(null);
+		if (noOfRecord == null) {
+			mv.addObject("paging", null);
+			return mv;
+		}
+
+		PagingImage paging = new PagingImage(noOfRecord,
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		mv.addObject("paging", paging);
+		mv.addObject("valueSearch", null);
+
+		return mv;
+	}
 }

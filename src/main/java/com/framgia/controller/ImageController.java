@@ -46,8 +46,30 @@ public class ImageController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView initPage() {
 		logger.info("Init page image");
+		ModelAndView mv = null;
 		List<ImageInfo> listImage = imageService.getListImage(null, Constants.NUMBER_PAGE_DEFAULT);
-		ModelAndView mv = new ModelAndView("homeGuest", "image", listImage);
+
+		if (Helpers.getUsername() == null) {
+			return new ModelAndView("homeGuest", "image", listImage);
+		}
+		Integer check = imageService.getPermissionId(Helpers.getUsername());
+
+		if (check == null) {
+			return new ModelAndView("login");
+		} else if (check == 1) {
+			mv = new ModelAndView("homePageAdmin", "image", listImage);
+		} else if (check == 2) {
+			mv = new ModelAndView("homeManagePage", "image", listImage);
+		} else {
+			if (imageService.getInfoUser(check) == null) {
+				return new ModelAndView("login");
+			}
+			if (imageService.getInfoUser(Helpers.getIdUser())) {
+				mv = new ModelAndView("homeUserGroup", "image", listImage);
+			} else {
+				mv = new ModelAndView("homeUser", "image", listImage);
+			}
+		}
 
 		Integer noOfRecord = imageService.getNoOfRecord(null);
 		if (noOfRecord == null) {
@@ -56,7 +78,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -67,7 +89,17 @@ public class ImageController {
 	public ModelAndView initPageUser() {
 		logger.info("Init page image");
 		List<ImageInfo> listImage = imageService.getListImage(null, Constants.NUMBER_PAGE_DEFAULT);
-		ModelAndView mv = new ModelAndView("homeUser", "image", listImage);
+
+		Boolean check = imageService.getInfoUser(Helpers.getIdUser());
+		ModelAndView mv;
+		if (check == null) {
+			return new ModelAndView("login");
+		}
+		if (check) {
+			mv = new ModelAndView("homeUserGroup", "image", listImage);
+		} else {
+			mv = new ModelAndView("homeUser", "image", listImage);
+		}
 
 		Integer noOfRecord = imageService.getNoOfRecord(null);
 		if (noOfRecord == null) {
@@ -76,7 +108,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -95,7 +127,7 @@ public class ImageController {
 		Integer noOfRecord = imageService.getNoOfRecord(valueSearch);
 
 		PagingImage paging = new PagingImage(noOfRecord,
-		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), noPage, noPage + 1, noPage - 1);
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), noPage, noPage + 1, noPage - 1);
 		Map<String, Object> map = new HashMap<>();
 		map.put("image", image);
 		map.put("paging", paging);
@@ -118,5 +150,47 @@ public class ImageController {
 
 		return imageService.removeVote(id, Helpers.getIdUser());
 
+	}
+
+	@RequestMapping(value = { "/homePageUserGroup" }, method = RequestMethod.GET)
+	public ModelAndView homeUserGroupPage() {
+
+		logger.info("Init page image manager Group");
+		List<ImageInfo> listImage = imageService.getListImage(null, Constants.NUMBER_PAGE_DEFAULT);
+		ModelAndView mv = new ModelAndView("homeUserGroup", "image", listImage);
+
+		Integer noOfRecord = imageService.getNoOfRecord(null);
+		if (noOfRecord == null) {
+			mv.addObject("paging", null);
+			return mv;
+		}
+
+		PagingImage paging = new PagingImage(noOfRecord,
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		mv.addObject("paging", paging);
+		mv.addObject("valueSearch", null);
+
+		return mv;
+	}
+
+	@RequestMapping(value = { "/homePageUser" }, method = RequestMethod.GET)
+	public ModelAndView homeUserPage() {
+
+		logger.info("Init page image manager Group");
+		List<ImageInfo> listImage = imageService.getListImage(null, Constants.NUMBER_PAGE_DEFAULT);
+		ModelAndView mv = new ModelAndView("homeUser", "image", listImage);
+
+		Integer noOfRecord = imageService.getNoOfRecord(null);
+		if (noOfRecord == null) {
+			mv.addObject("paging", null);
+			return mv;
+		}
+
+		PagingImage paging = new PagingImage(noOfRecord,
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		mv.addObject("paging", paging);
+		mv.addObject("valueSearch", null);
+
+		return mv;
 	}
 }
