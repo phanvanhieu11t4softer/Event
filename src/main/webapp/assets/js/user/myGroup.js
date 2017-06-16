@@ -6,7 +6,7 @@ function getGroup() {
 	    dataType : 'json',
 	    async : true,
 	    success : function(data, textStatus, jqXHR) {
-
+	    	$(".btnLeaveGroup").removeClass('hidden_elem');
     		// display section group info
     		$(".infoGroup").show();
 
@@ -115,4 +115,27 @@ function getGroup() {
 	    	$("#messageContainer").removeClass('hidden_elem');
 	    }
 	});
+}
+
+function clickLeaveGroup() {
+	if (confirm($("#comfirmLeaveGroup").text()) == true) {
+		$.ajax({
+			url : "/EventMedia/user/leaveGroup",
+			type : "GET",
+			data : false,
+			dataType : 'json',
+			success : function(data) {
+				if (data) {
+					alert($("#mgsLeaveGroupSuccess").text());
+					window.location.href = "/EventMedia/user/";
+				}
+				else {
+					$('#mgsRequestJoin').html($("#requestJoinError").text());
+				}
+			},
+			error : function(error) {
+				$('#mgsRequestJoin').html($("#requestJoinError").text());
+			}
+		});
+	}
 }

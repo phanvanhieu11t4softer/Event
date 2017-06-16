@@ -22,4 +22,6 @@ public interface UserService extends BaseService {
 	boolean requestUserJoinGroup(Integer idGroup, Integer idUser);
 
 	Integer getInfoUser(Integer idUser);
+
+	boolean leaveGroup(Integer idUser);
 }
