@@ -1,6 +1,6 @@
-function getGroup(id) {
+function getGroup() {
 	$.ajax({
-	    url : "/EventMedia/groupInfo/"+id,
+	    url : "/EventMedia/user/myGroup",
 	    type : "POST",
 	    data : false,
 	    dataType : 'json',
@@ -66,8 +66,7 @@ function getGroup(id) {
 
     		// list image
     		if (data.image.length > 0) {
-    			if ($.fn.DataTable
-                        .isDataTable('#dataTables-image')) {
+    			if ($.fn.DataTable.isDataTable('#dataTables-image')) {
                     $('#dataTables-image').DataTable()
                             .destroy();
                 }
@@ -94,47 +93,26 @@ function getGroup(id) {
                         }],
                     responsive : true
                 });
+
             	$(this).modallery({
             	    title: "<b>"+data.name +"</b>",
             	    navigate: true,
             	    arrows: true,
             	    keypress: true
             	  });
+            	
     			$(".listImage").show();
     		} else {
     			$(".listImageBody").html($("mgsNoImage").text());
     			$(".listImage").show();
     		}
-    		
+	    	
 	    },
 	    error : function(jqXHR, textStatus, errorThrown) {
-	    	$("#messageContainer").removeClass('hidden_elem');
 	    	$(".infoGroup").hide();
 	    	$(".listImage").hide();
 	    	$(".listMember").hide();
+	    	$("#messageContainer").removeClass('hidden_elem');
 	    }
-	});
-}
-
-function clickBtnRequestJoin() {
-	var formURL = "/EventMedia/groupInfo/" + $(".lblIdGroup").text()+ "/request";
-	$.ajax({
-		url : formURL,
-		type : "GET",
-		data : false,
-		dataType : 'json',
-		success : function(data) {
-			if (data) {
-				$(".btnRequestJoin").addClass('hidden_elem');
-				// Message
-				$('#mgsRequestJoin').html($("#requestJoinSuccess").text());
-			}
-			else {
-				$('#mgsRequestJoin').html($("#requestJoinError").text());
-			}
-		},
-		error : function(error) {
-			$('#mgsRequestJoin').html($("#requestJoinError").text());
-		}
 	});
 }
