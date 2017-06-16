@@ -8,7 +8,19 @@
  * 26/05/2017
  -->
 <body onload='getGroup(${idGroup});'>
-	
+	<label id="mgsNoMember" class="hidden_elem">
+		<spring:message code='manager-mgs-no-member' text='' /></label>
+	<label id="mgsNoImage" class="hidden_elem">
+		<spring:message code='manager-mgs-no-image' text='' /></label>
+	<label id="requestJoinError" class="hidden_elem">
+		<spring:message code='message-request-join-group-error' text='' /></label>
+	<label id="requestJoinSuccess" class="hidden_elem">
+		<spring:message code='message-request-join-group-success' text='' /></label>
+
+	<section class="bg_white clearfix messageError">
+		<div class="body clearfix mt20" id="mgsRequestJoin">
+		</div>
+	</section>
 
 	<section class="bg_white clearfix messageError">
 		<div class="body clearfix mt20 hidden_elem" id="messageContainer">
@@ -18,35 +30,39 @@
 	<section class="bg_white clearfix manageUser infoGroup">
 		<div class="body clearfix mt20">
 			<div class="panel panel-default">
-				<div class="panel-heading" style="height: 45px;">
-					<div class="head-left" style="float: left; with: 75%">
+				<div class="panel-heading">
+					<div class="group-head-left">
 						<h3 class="panel-title">Information group</h3>
 					</div>
-					<div id="divBtnEdit" class="head-right hidden_elem" style="float: right; with: 20%; margin-top: -4px;">
-						<input type="button" id="btnRequestJoin" onclick="clickBtnRequestJoin();" value="Request Join Group" class="btn btn-default">
-					</div>
+					<c:if test="${not empty pageContext.request.userPrincipal.name}">
+						<div class="btnRequestJoin hidden_elem">
+							<label class="lblusername hidden_elem">${pageContext.request.userPrincipal.name}</label>
+							<label class="lblIdGroup hidden_elem"></label>
+							<input type="button" onclick="clickBtnRequestJoin();" value="Request Join Group" class="btn btn-default">
+						</div>
+					</c:if>
 				</div>
 				<div class="panel-body">
 					<!-- Group Info -->
 					<div class="form-group form-group-lg">
 						<div class="col-sm-12">
-							<div style="width: 12%; float: left;">
+							<div class="lblGroupLeft">
 								<label>Name</label>
 							</div>
-							<div style="width: 88%; float: left;">
+							<div class="lblGroupRight">
 								<label id="lblName"></label>
 							</div>
 						</div>
-						<div class="col-sm-12" style="padding: 5px"></div>
+						<div class="col-sm-12 common-padding5"></div>
 						<div class="col-sm-12">
-							<div style="width: 12%; float: left;">
+							<div class="lblGroupLeft">
 								<label>Description</label>
 							</div>
-							<div style="width: 88%; float: left;">
+							<div class="lblGroupRight">
 								<label id="lblDescription"></label>
 							</div>
 						</div>
-						<div class="col-sm-12" style="padding: 5px"></div>
+						<div class="col-sm-12 common-padding5"></div>
 						<div class="col-sm-6">
 							<div class="detail-borrowed-left">
 								<label>Date start</label>
@@ -65,7 +81,7 @@
 							</div>
 						</div>
 						
-						<div class="col-sm-12" style="padding: 5px"></div>
+						<div class="col-sm-12 common-padding5"></div>
 						<div class="col-sm-6">
 							<div class="detail-borrowed-left">
 								<label>Note</label>
@@ -76,12 +92,12 @@
 						</div>
 						<div class="col-sm-3">
 							<input type="radio" name="status" value="0" disabled="disabled"> Active
-							<span style="padding-left: 5px;"></span>
+							<span class="common-padding-left5"></span>
 							<input type="radio" name="status" value="1" disabled="disabled"> Active
 						</div>
 						<div class="col-sm-3">
 							<input type="radio" name="type" value="0" disabled="disabled"> Private
-							<span style="padding-left: 5px;"></span>
+							<span class="common-padding-left5"></span>
 							<input type="radio" name="type" value="1" disabled="disabled"> Public
 						</div>
 					</div>
@@ -94,11 +110,9 @@
 	<section class="bg_white clearfix manageUser listMember">
 		<div class="body clearfix mt20">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="height: 45px;">
-						<div class="head-left" style="float: left; with: 75%">
+					<div class="panel-heading">
+						<div class="head-left">
 							<h3 class="panel-title">List Member</h3>
-						</div>
-						<div id="divBtnEdit" class="head-right" style="float: right; with: 20%; margin-top: -4px;">
 						</div>
 					</div>
 

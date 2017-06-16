@@ -168,7 +168,7 @@ public class GroupServiceImpl extends BaseServiceImpl implements GroupService {
 
 		List<String> content = new ArrayList<String>();
 		for (Image item : group.getImages()) {
-			if (item == null)
+			if (item == null || Constants.DEL_FLG_DEL.equals(item.getDeleteFlag()))
 				continue;
 			int count = 0;
 			for (Vote vote : item.getVotes()) {
