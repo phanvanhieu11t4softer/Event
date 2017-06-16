@@ -68,7 +68,7 @@ public class ImageServiceImpl extends BaseServiceImpl implements ImageService {
 
 		try {
 			List<Image> listImage = getImageDAO().getListImage(condition, (page - 1) * Constants.NUMBER_PAGE_LIMIT,
-			        Constants.NUMBER_PAGE_LIMIT);
+					Constants.NUMBER_PAGE_LIMIT);
 			if (listImage == null || listImage.size() == 0)
 				return null;
 
@@ -128,6 +128,39 @@ public class ImageServiceImpl extends BaseServiceImpl implements ImageService {
 			logger.error("add vote error", e);
 			throw e;
 		}
+	}
+
+	@Override
+	public Boolean getInfoUser(Integer idUser) {
+		try {
+			User user = userDAO.findById(idUser, false);
+			if (user == null) {
+				return null;
+			}
+			if (Constants.STATUSJOIN_CODE_APPOVE.equals(user.getStatusJoin()) && user.getIdGroup() != null) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			logger.error("getInfoUser", e);
+		}
+		return null;
+
+	}
+
+	@Override
+	public Integer getPermissionId(String username) {
+		try {
+			User user = userDAO.findByUserName(username);
+			if (user == null) {
+				return null;
+			}
+			return user.getPermission().getId();
+		} catch (Exception e) {
+			logger.error("getInfoUser", e);
+		}
+		return null;
 	}
 
 }
