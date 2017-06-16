@@ -58,7 +58,7 @@
 			<div class="clearfix"></div>
 			<div id="sub_btn">
 				<a href="/EventMedia/manager">
-					<input type="button" value="Back manger home" class="btn-forwardscreen"></a>
+					<input type="button" value="Back Page Manager" class="btn-forwardscreen"></a>
 			</div>
 		</section>
 		<c:choose>
