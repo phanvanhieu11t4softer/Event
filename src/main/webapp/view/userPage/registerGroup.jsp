@@ -14,7 +14,10 @@
  
 <section class="bg_white clearfix messageError">
 	<div class="body clearfix mt20 hidden_elem" id="messageContainer">
-		<spring:message code='regist_group_success' text='' /> </div>
+		<spring:message code='regist_group_success' text='' />
+		<br>
+		<span class="noti-green">
+		<spring:message code='mesage-notification-when-regist-group-success' text='' /></span></div>
 </section>
 <section class="bg_white clearfix messageError">
 	<div class="body clearfix mt20 hidden_elem" id="messageContainerFail">
@@ -40,20 +43,20 @@
 							<th>Name</th>
 							<td>
 								<form:textarea maxlength="50" path="name" name="name" id="name"
-										class="form-control css-required" placeholder="This is item required" />
+										class="form-control form-text-100 css-required" placeholder="This is item required" />
 							</td>
 						</tr>
 						<tr>
 							<th>Description</th>
 
 							<td><form:textarea maxlength="500" path="description" name="description" id="description"
-										class="form-control css-required" placeholder="This is item required" />
+										class="form-control form-text-100 css-required" placeholder="This is item required" />
 							</td>
 						</tr>
 						<tr>
 							<th>Note</th>
 							<td><form:textarea maxlength="500" path="note" name="note" id="note"
-										class="form-control form-text-65" placeholder="This is not item required" />
+										class="form-control form-text-100" placeholder="This is not item required" />
 							</td>
 						</tr>
 						<tr>
@@ -87,6 +90,8 @@
 		</div>
 		<div class="clearfix"></div>
 		<div id="sub_btn">
+			<a href="/EventMedia/user">
+				<input type="button" value="Back Home" class="btn-forwardscreen"></a>
 			<input type="button" id="btnRegiser" value="Register" class="btn-forwardscreen">
 			<input type="button" id="btnClear" value="Clear" class="btn-forwardscreen">
 		</div>

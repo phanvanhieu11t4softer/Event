@@ -32,7 +32,7 @@
 							<th>Username</th>
 							<td>
 								<form:input path="username" name="username" id="username"
-										class="form-control css-required" form-text-65 placeholder="This is item required" />
+										class="form-control form-text-65 css-required" placeholder="This is item required" />
 							</td>
 						</tr>
 						<tr>

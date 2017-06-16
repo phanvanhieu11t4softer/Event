@@ -3,6 +3,7 @@ package com.framgia.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.framgia.bean.ConditionUserBean;
@@ -148,7 +149,7 @@ public class ManageUserServiceImpl extends BaseServiceImpl implements ManageUser
 		try {
 			User updUser = userDAO.findById(idUser, true);
 
-			if (updUser.getIdGroup() != 0) {
+			if (updUser.getIdGroup() != null) {
 
 				Group group = groupDAO.findById(updUser.getIdGroup(), true);
 
