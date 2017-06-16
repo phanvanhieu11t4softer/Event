@@ -456,7 +456,7 @@
 	<definition name="uploadimage" extends="base.definition">
 		<put-attribute name="title" value="Upload Image" />
 		<put-attribute name="screenname" value="Upload Image" />
-		<put-attribute name="menu" value="" />
+		<put-attribute name="menu" value="/view/user/menu.jsp" />
 		<put-attribute name="body" value="/view/user/uploadImage.jsp" />
 		<put-list-attribute name="cssDefault">
 			<add-attribute value="/assets/css/bootstrap.min.css" />
@@ -478,7 +478,7 @@
 	<definition name="fileUploadSuccess" extends="base.definition">
 		<put-attribute name="title" value="Detail Image" />
 		<put-attribute name="screenname" value="Detail Image" />
-		<put-attribute name="menu" value="" />
+		<put-attribute name="menu" value="/view/user/menu.jsp" />
 		<put-attribute name="body" value="/view/user/detailImage.jsp" />
 		<put-list-attribute name="cssDefault">
 			<add-attribute value="/assets/css/bootstrap.min.css" />
