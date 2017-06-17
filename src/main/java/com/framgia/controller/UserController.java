@@ -1,6 +1,7 @@
 package com.framgia.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,6 +142,22 @@ public class UserController {
 	@RequestMapping(value = { "/user/leaveGroup" }, method = RequestMethod.GET)
 	public @ResponseBody boolean leaveGroup() {
 		return userService.leaveGroup(Helpers.getIdUser());
+	}
+	
+	// list group
+	@RequestMapping(value = "/user/group", method = RequestMethod.GET)
+	public ModelAndView adminPage() {
+
+		return new ModelAndView("listGroup");
+	}
+
+	@RequestMapping(value = "/user/searchgroup", method = RequestMethod.GET)
+	public @ResponseBody List<GroupInfo> findByCondition(
+	        @ModelAttribute("name") String name) {
+		logger.info("call service; get list group");
+
+		return groupService.findByGroupWithName(name);
+
 	}
 
 }

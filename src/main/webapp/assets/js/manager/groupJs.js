@@ -100,13 +100,13 @@ function getGroup() {
 	                        	"mRender": function(data, type, row) {
 	                        		if (row.statusJoin == "Request") {
 	                        		 return "<button onclick='clickRejectUser("+data+","+$("#id").val()+",this)'>" +
-	                        		 		"<img src='./assets/imgs/reject.jpg' alt='Reject user' style='height: 20px;'/>" +
+	                        		 		"<img src='./assets/imgs/reject.jpg' alt='Reject user' class='img-icon'/>" +
 	                        		 		"</button>" +
 	                        		 		"  <button onclick='clickAcceptUser("+data+","+$("#id").val()+",this)'>" +
-	                        		 		"<img src='./assets/imgs/accept.jpg' alt='Accept user' style='height: 20px;'/></button>";
+	                        		 		"<img src='./assets/imgs/accept.jpg' alt='Accept user' class='img-icon'/></button>";
 	                        		} else {
 	                        			 return "<button onclick='clickRemoveUser("+data+","+$("#id").val()+",this)'>" +
-	                        		 		"<img src='./assets/imgs/delete-record.png' alt='Remove user' style='height: 20px;'/>" +
+	                        		 		"<img src='./assets/imgs/delete-record.png' alt='Remove user' class='img-icon'/>" +
 	                        		 		"</button>";
 	                        		}
 
@@ -151,7 +151,7 @@ function getGroup() {
                         }, { "mDataProp" : "id",
                         	"mRender": function(data, type, row) {
                         		 return "<button onclick='clickRemoveImage("+data+",this)'>" +
-                        		 		"<img src='./assets/imgs/delete-record.png' style='height: 20px;'/>" +
+                        		 		"<img src='./assets/imgs/delete-record.png' class='img-icon'/>" +
                         		 		"</button>";
                             }
                         }, 
@@ -553,7 +553,7 @@ function clickAcceptUser(id, idGroup, el) {
 				// change value
 				$(el).parents('tr').find("td:eq(4)").text("Approve");
 				$(el).parents('tr').find("td:eq(5)").html("<button onclick='clickRemoveUser("+id+","+idGroup+",this)'>" +
-        		 		"<img src='./assets/imgs/delete-record.png' alt='Remove user' style='height: 20px;'/></button>");
+        		 		"<img src='./assets/imgs/delete-record.png' alt='Remove user' class='img-icon'/></button>");
 			}
 			else {
 				goTopPage();s

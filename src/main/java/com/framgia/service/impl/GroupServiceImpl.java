@@ -182,4 +182,37 @@ public class GroupServiceImpl extends BaseServiceImpl implements GroupService {
 		return new DataHighChart(String.valueOf(content.size()), content);
 	}
 
+	@Override
+	public List<GroupInfo> findByGroupWithName(String name) {
+		try {
+			List<Group> groupList = groupDAO.findByConditonForUser(name);
+
+			if (Helpers.isEmpty(groupList))
+				return null;
+
+			List<GroupInfo> groupInfo = new ArrayList<GroupInfo>();
+
+			for (Group item : groupList) {
+
+				GroupInfo group = new GroupInfo();
+
+				group.setId(item.getId());
+				group.setName(item.getName());
+				group.setDescription(item.getDescription());
+				group.setType(Constants.GROUP_TYPE_VALUE_PUBLIC);
+				group.setStatus(Constants.GROUP_STATUS_VALUE_ACTIVE);
+				group.setDateStart(DateUtil.convertDatetoString(item.getDateStart()));
+				group.setDateEnd(DateUtil.convertDatetoString(item.getDateEnd()));
+
+				groupInfo.add(group);
+
+			}
+			return groupInfo;
+		} catch (Exception e) {
+			logger.info("Exception at function findByGroupWithName in GroupServiceImpl: ", e);
+
+			return null;
+		}
+	}
+
 }

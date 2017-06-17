@@ -45,7 +45,9 @@
 							<input type="button" onclick="clickBtnRequestJoin();" value="Request Join Group" class="btn btn-default">
 						</div>
 						<div class="btnLeaveGroup hidden_elem">
-							<input type="button" onclick="clickLeaveGroup();" value="Leave Group" class="btn btn-default">
+							<button onclick="clickLeaveGroup();" class="btn btn-default">
+								<img src='../assets/imgs/leave-group.png' alt='Request join group' class='img-icon'/>   Leave Group
+							</button>
 						</div>
 					</c:if>
 				</div>
