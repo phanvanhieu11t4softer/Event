@@ -16,4 +16,6 @@ public interface GroupDAO extends IGenericDAO<Integer, Group> {
 	Long getCountType(Integer type, Integer status, String deleteFlag);
 
 	List<Group> getListGroup();
+
+	List<Group> findByConditonForUser(String name);
 }

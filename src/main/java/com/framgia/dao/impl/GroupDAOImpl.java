@@ -2,6 +2,7 @@ package com.framgia.dao.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
@@ -95,5 +96,20 @@ public class GroupDAOImpl extends GenericDAO<Integer, Group> implements GroupDAO
 		crit.add(Restrictions.eq("deleteFlag", Constants.DEL_FLG));
 
 		return crit.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Group> findByConditonForUser(String name) {
+		logger.info("Search list group for page user.");
+		Criteria criterion = getSession().createCriteria(Group.class);
+		criterion.add(Restrictions.eq("deleteFlag", Constants.DEL_FLG));
+		criterion.add(Restrictions.eq("status", Integer.parseInt(Constants.GROUP_STATUS_CODE_ACTIVE)));
+		criterion.add(Restrictions.eq("type", Integer.parseInt(Constants.GROUP_TYPE_CODE_PUBLIC)));
+		if (StringUtils.isNotBlank(name)) {
+			criterion.add(Restrictions.like("name", "%" + name + "%"));
+		}
+
+		return criterion.list();
 	}
 }

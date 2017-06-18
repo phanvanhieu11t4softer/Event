@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -50,27 +51,27 @@ public class ImageController {
 		List<ImageInfo> listImage = imageService.getListImage(null, Constants.NUMBER_PAGE_DEFAULT);
 
 		if (Helpers.getUsername() == null) {
-			return new ModelAndView("homeGuest", "image", listImage);
-		}
-		Integer check = imageService.getPermissionId(Helpers.getUsername());
-
-		if (check == null) {
-			return new ModelAndView("login");
-		} else if (check == 1) {
-			mv = new ModelAndView("homePageAdmin", "image", listImage);
-		} else if (check == 2) {
-			mv = new ModelAndView("homeManagePage", "image", listImage);
+			mv = new ModelAndView("homeGuest", "image", listImage);
 		} else {
-			if (imageService.getInfoUser(check) == null) {
+			Integer check = imageService.getPermissionId(Helpers.getUsername());
+
+			if (check == null) {
 				return new ModelAndView("login");
-			}
-			if (imageService.getInfoUser(Helpers.getIdUser())) {
-				mv = new ModelAndView("homeUserGroup", "image", listImage);
+			} else if (check == 1) {
+				mv = new ModelAndView("homePageAdmin", "image", listImage);
+			} else if (check == 2) {
+				mv = new ModelAndView("homeManagePage", "image", listImage);
 			} else {
-				mv = new ModelAndView("homeUser", "image", listImage);
+				if (imageService.getInfoUser(check) == null) {
+					return new ModelAndView("login");
+				}
+				if (imageService.getInfoUser(Helpers.getIdUser())) {
+					mv = new ModelAndView("homeUserGroup", "image", listImage);
+				} else {
+					mv = new ModelAndView("homeUser", "image", listImage);
+				}
 			}
 		}
-
 		Integer noOfRecord = imageService.getNoOfRecord(null);
 		if (noOfRecord == null) {
 			mv.addObject("paging", null);
@@ -78,7 +79,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -108,7 +109,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -127,7 +128,7 @@ public class ImageController {
 		Integer noOfRecord = imageService.getNoOfRecord(valueSearch);
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), noPage, noPage + 1, noPage - 1);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), noPage, noPage + 1, noPage - 1);
 		Map<String, Object> map = new HashMap<>();
 		map.put("image", image);
 		map.put("paging", paging);
@@ -166,7 +167,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -187,7 +188,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
