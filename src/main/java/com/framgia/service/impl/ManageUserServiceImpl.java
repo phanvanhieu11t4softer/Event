@@ -3,7 +3,6 @@ package com.framgia.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.framgia.bean.ConditionUserBean;
@@ -143,13 +142,20 @@ public class ManageUserServiceImpl extends BaseServiceImpl implements ManageUser
 		return null;
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public Boolean deleteUser(Integer idUser, String userName) {
 		try {
 			User updUser = userDAO.findById(idUser, true);
+			if (updUser == null) {
+				return false;
+			}
+			updUser.setDeleteFlag(Constants.DEL_FLG_DEL);
+			updUser.setUserUpdate(userName);
+			updUser.setDateUpdate(DateUtil.getDateNow());
 
-			if (updUser.getIdGroup() != null) {
+			userDAO.saveOrUpdate(updUser);
+
+			if (updUser.getIdGroup() != null && updUser.getPermission().getId() == 2) {
 
 				Group group = groupDAO.findById(updUser.getIdGroup(), true);
 
@@ -164,7 +170,7 @@ public class ManageUserServiceImpl extends BaseServiceImpl implements ManageUser
 							continue;
 
 						if (item.getPermission().getId().equals(Constants.PERMISSION_CODE_MANAGER)
-						        && group.getDeleteFlag().equals(Constants.DEL_FLG))
+						        && group.getDeleteFlag().equals(Constants.DEL_FLG_DEL))
 							continue;
 
 						User user = getUserDAO().findById(item.getId(), true);
@@ -180,15 +186,6 @@ public class ManageUserServiceImpl extends BaseServiceImpl implements ManageUser
 					}
 				}
 			}
-
-			if (updUser == null) {
-				return false;
-			}
-			updUser.setDeleteFlag(Constants.DEL_FLG_DEL);
-			updUser.setUserUpdate(userName);
-			updUser.setDateUpdate(DateUtil.getDateNow());
-
-			userDAO.saveOrUpdate(updUser);
 
 			return true;
 

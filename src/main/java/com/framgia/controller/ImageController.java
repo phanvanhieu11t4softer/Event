@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.framgia.bean.ImageInfo;
 import com.framgia.bean.PagingImage;
 import com.framgia.service.ImageService;
+import com.framgia.service.UserService;
 import com.framgia.util.Constants;
 import com.framgia.util.DateUtil;
 import com.framgia.util.Helpers;
@@ -38,6 +38,9 @@ public class ImageController {
 
 	@Autowired
 	ImageService imageService;
+
+	@Autowired
+	UserService userService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
@@ -79,7 +82,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -109,7 +112,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -128,11 +131,23 @@ public class ImageController {
 		Integer noOfRecord = imageService.getNoOfRecord(valueSearch);
 
 		PagingImage paging = new PagingImage(noOfRecord,
-		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), noPage, noPage + 1, noPage - 1);
-		Map<String, Object> map = new HashMap<>();
-		map.put("image", image);
-		map.put("paging", paging);
-		ModelAndView model = new ModelAndView("homeUser", "image", image);
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), noPage, noPage + 1, noPage - 1);
+
+		ModelAndView model;
+		Integer check = userService.getInfoUser(Helpers.getIdUser());
+		if (check == null) {
+			return new ModelAndView("login");
+		}
+
+		if (check == 1) {
+			model = new ModelAndView("homePageAdmin", "image", image);
+		} else if (check == 2) {
+			model = new ModelAndView("homeManagePage", "image", image);
+		} else if (check == 3) {
+			model = new ModelAndView("homeUserGroup", "image", image);
+		} else {
+			model = new ModelAndView("homeUser", "image", image);
+		}
 
 		model.addObject("paging", paging);
 		model.addObject("valueSearch", valueSearch);
@@ -167,7 +182,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -188,7 +203,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
