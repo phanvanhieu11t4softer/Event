@@ -107,6 +107,7 @@ function getGroup() {
 	                        		} else {
 	                        			 return "<button onclick='clickRemoveUser("+data+","+$("#id").val()+",this)'>" +
 	                        		 		"<img src='./assets/imgs/delete-record.png' alt='Remove user' class='img-icon'/>" +
+	                        		 		"<span class='hidden_elem "+data+"'>"+row.username+"</span>"+
 	                        		 		"</button>";
 	                        		}
 
@@ -146,7 +147,10 @@ function getGroup() {
                     "aoColumns" : [
                     	{
                             "mDataProp" : "title"
-                        }, { "mDataProp" : "userCreate"
+                        }, { "mDataProp" : "userCreate",
+                        	"mRender": function(data, type, row) {
+								return '<span class="author">'+data+'</span>';
+							}
                         }, { "mDataProp" : "votes.length"
                         }, { "mDataProp" : "id",
                         	"mRender": function(data, type, row) {
@@ -470,6 +474,7 @@ function clickRemoveImage(id, el) {
 
 // REMOVE USER
 function clickRemoveUser(id, idGroup, el) {
+
 	if (confirm("Are you sure remove user throw out this group?") == true) {
 		$('#messageContainer').html('');
 		var formURL = "/EventMedia/manager/user/remove/"+idGroup+"/" + id;
@@ -481,11 +486,18 @@ function clickRemoveUser(id, idGroup, el) {
 			success : function(data) {
 				goTopPage();
 				if (data) {
+					$('#dataTables-image .author').each(function()
+					{
+						if ($(this).html() == $("."+id).html()) {
+							$('#dataTables-image').DataTable().row($(this).parents('td').parents('tr')).remove().draw();
+						}
+					});
 					// remove datatable
 					$('#dataTables-result').DataTable().row($(el).parents('tr')).remove().draw();
-	
+
 					// Message
 					$('#message').html($("#mgsRemoveUserSuccess").text());
+
 				}
 				else {
 					$('#message').html($("#mgsRemoveUserError").text());
@@ -497,6 +509,7 @@ function clickRemoveUser(id, idGroup, el) {
 			}
 		});
 	}
+
 }
 //REJECT USER JOIN GROUP
 function clickRejectUser(id, idGroup, el) {

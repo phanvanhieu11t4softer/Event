@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import com.framgia.bean.GroupInfo;
 import com.framgia.bean.ImageInfo;
-import com.framgia.model.Group;
 import com.framgia.model.Image;
 import com.framgia.model.User;
 import com.framgia.model.Vote;
@@ -39,13 +38,7 @@ public class ImageServiceImpl extends BaseServiceImpl implements ImageService {
 	public boolean removeImageInGroup(Integer id) {
 		try {
 			Image image = getImageDAO().findById(id, true);
-			image.setDateUpdate(DateUtil.getDateNow());
-			image.setUserUpdate(Helpers.getUsername());
-			Group group = new Group();
-			group.setId(idFreeGroup);
-			image.setGroup(group);
-
-			imageDAO.saveOrUpdate(image);
+			imageDAO.delete(image);
 			return true;
 		} catch (Exception e) {
 			logger.error("remove image throw out group error", e);

@@ -70,9 +70,9 @@ public class ImageDAOImpl extends GenericDAO<Integer, Image> implements ImageDAO
 		Criteria crit = getSession().createCriteria(Image.class);
 		crit.add(Restrictions.eq("deleteFlag", Constants.DEL_FLG));
 		crit.createCriteria("group", "group");
-		crit.add(Restrictions.gt("group.id", 0));
 		crit.add(Restrictions.eq("group.deleteFlag", Constants.DEL_FLG));
 		crit.add(Restrictions.eq("group.type", Integer.parseInt(Constants.GROUP_TYPE_CODE_PUBLIC)));
+		crit.add(Restrictions.eq("group.status", Integer.parseInt(Constants.GROUP_STATUS_CODE_ACTIVE)));
 		if (StringUtils.isNotEmpty(condition)) {
 			crit.add(Restrictions.or(Restrictions.like("title", "%" + condition + "%"),
 			        Restrictions.like("group.name", "%" + condition + "%")));
@@ -89,8 +89,8 @@ public class ImageDAOImpl extends GenericDAO<Integer, Image> implements ImageDAO
 		Criteria crit = getSession().createCriteria(Image.class);
 		crit.add(Restrictions.eq("deleteFlag", Constants.DEL_FLG));
 		crit.createCriteria("group", "group");
-		crit.add(Restrictions.gt("group.id", 0));
 		crit.add(Restrictions.eq("group.type", Integer.parseInt(Constants.GROUP_TYPE_CODE_PUBLIC)));
+		crit.add(Restrictions.eq("group.status", Integer.parseInt(Constants.GROUP_STATUS_CODE_ACTIVE)));
 		if (StringUtils.isNotEmpty(condition)) {
 			crit.add(Restrictions.or(Restrictions.like("title", "%" + condition + "%"),
 			        Restrictions.like("group.name", "%" + condition + "%")));
