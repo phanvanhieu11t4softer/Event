@@ -11,14 +11,10 @@
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/manager**"
-			access="hasRole('ROLE_MANAGER') or hasRole('ADMIN')" />
-		<intercept-url pattern="/manager/**"
-			access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/user**"
-			access="hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/user/**"
-			access="hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/manager**" access="hasRole('ROLE_MANAGER')" />
+		<intercept-url pattern="/manager/**" access="hasRole('ROLE_MANAGER')" />
+		<intercept-url pattern="/user**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/guest**" access="hasRole('permitAll')" />
 
 		<!-- access denied page -->

@@ -562,7 +562,7 @@
 		</put-list-attribute>
 	</definition>
 
-<!-- Home Page Manager -->
+	<!-- Home Page Manager -->
 	<definition name="homeManagePage" extends="base.definition">
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="screenname" value="HOME" />
@@ -594,8 +594,8 @@
 			<add-attribute value="/assets/css/styleHome.css" />
 		</put-list-attribute>
 	</definition>
-	
-	<!-- Home page user no group-->
+
+	<!-- Home page user no group -->
 	<definition name="homeUserGroup" extends="base.definition">
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="screenname" value="HOME" />
@@ -627,8 +627,8 @@
 			<add-attribute value="/assets/css/styleHome.css" />
 		</put-list-attribute>
 	</definition>
-	
-	<!-- Home page Admin-->
+
+	<!-- Home page Admin -->
 	<definition name="homePageAdmin" extends="base.definition">
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="screenname" value="HOME" />
@@ -660,7 +660,7 @@
 			<add-attribute value="/assets/css/styleHome.css" />
 		</put-list-attribute>
 	</definition>
-	
+
 	<definition name="listGroup" extends="base.definition">
 		<put-attribute name="title" value="User - list group" />
 		<put-attribute name="screenname" value="List Group" />
@@ -687,5 +687,5 @@
 			<add-attribute value="/assets/js/user/listGroup.js" />
 		</put-list-attribute>
 	</definition>
-	
+
 </tiles-definitions>

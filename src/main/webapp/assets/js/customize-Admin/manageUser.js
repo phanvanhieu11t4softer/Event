@@ -34,7 +34,11 @@ window.onload = function() {
                             {
                                 "mDataProp" : "username",
                                 "mRender" : function(data, type, row) {
-                                	var a = "aasa";
+                                	if("ROLE_ADMIN" == row.permission.name){
+                                		return "<a href='/EventMedia/detail/" + row.id + "'>"
+                                                + data+"</a>";
+                                	}
+                                	
                                     return "<button onclick='clickBtnDel("+row.id+",this)'> Delete </button>"
                                     +"&nbsp;&nbsp;&nbsp;<a href='/EventMedia/detail/" + row.id + "'>"
                                             + data+"</a>";
