@@ -1,9 +1,7 @@
 package com.framgia.controller;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +80,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -112,7 +110,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -131,7 +129,7 @@ public class ImageController {
 		Integer noOfRecord = imageService.getNoOfRecord(valueSearch);
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), noPage, noPage + 1, noPage - 1);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), noPage, noPage + 1, noPage - 1);
 
 		ModelAndView model;
 		Integer check = userService.getInfoUser(Helpers.getIdUser());
@@ -182,7 +180,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 
@@ -203,7 +201,7 @@ public class ImageController {
 		}
 
 		PagingImage paging = new PagingImage(noOfRecord,
-				(int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
+		        (int) Math.ceil(noOfRecord * 1.0 / Constants.NUMBER_PAGE_LIMIT), 1, 2, 0);
 		mv.addObject("paging", paging);
 		mv.addObject("valueSearch", null);
 

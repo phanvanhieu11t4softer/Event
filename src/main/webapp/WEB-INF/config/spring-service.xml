@@ -10,6 +10,7 @@
 				<property name="userDAO" ref="UserDAO"></property>
 				<property name="permissionDAO" ref="PermissionDAO"></property>
 				<property name="groupDAO" ref="GroupDAO"></property>
+				<property name="imageDAO" ref="ImageDAO"></property>
 			</bean>
 		</property>
 	</bean>

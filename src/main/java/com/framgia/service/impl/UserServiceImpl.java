@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.framgia.bean.UserInfo;
 import com.framgia.model.Group;
+import com.framgia.model.Image;
 import com.framgia.model.User;
 import com.framgia.security.CustomUserDetail;
 import com.framgia.service.UserService;
@@ -128,6 +129,13 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			user.setUserUpdate(Helpers.getUsername());
 
 			userDAO.saveOrUpdate(user);
+
+			// delete image
+			Image image = imageDAO.getImageByUserCreate(user.getUsername(), idGroup);
+			if (image != null) {
+				imageDAO.delete(image);
+			}
+
 			return true;
 		} catch (Exception e) {
 			logger.error("remove user", e);
