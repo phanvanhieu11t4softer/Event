@@ -64,4 +64,19 @@ public interface Constants {
 
 	// Name System
 	public static String NAME_SYSTEM = "System";
+
+	// Format file excel
+	public static String FORMAT_FILE = "application/vnd.ms-excel";
+
+	// File name
+	public static String FILE_NAME = "/ReportUser.xls";
+
+	// Path
+	public static String PATH = "WEB-INF";
+
+	// format header
+	public static String HEADER = "Content-Disposition";
+
+	// format header
+	public static String HEADER_FILE = "attachment; filename=\"ReportUser.xls\"";
 }
