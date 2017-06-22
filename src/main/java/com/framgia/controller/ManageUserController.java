@@ -3,6 +3,10 @@ package com.framgia.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -42,6 +46,9 @@ public class ManageUserController {
 
 	@Autowired
 	ManageUserService manageUserService;
+
+	@Autowired
+	private ServletContext context;
 
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
@@ -113,5 +120,11 @@ public class ManageUserController {
 		} else {
 			return null;
 		}
+	}
+
+	@RequestMapping(value = "/export", method = RequestMethod.GET)
+	public String export(HttpServletRequest request, HttpServletResponse response) {
+		manageUserService.exportUser(request, response, context);
+		return null;
 	}
 }
